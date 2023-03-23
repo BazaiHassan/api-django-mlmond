@@ -7,6 +7,15 @@ Serializer for dataset APIs
 from rest_framework import serializers
 from core.models import Dataset, Tag
 
+class DatasetImageSerializer(serializers.ModelSerializer):
+    """ Serializer to uploading image to the dataset """
+
+    class Meta:
+        model = Dataset
+        fields = ['id', 'image']
+        read_only_fields = ['id']
+        extra_kwargs = {'image':{'required':'True'}}
+
 class TagSerializer(serializers.ModelSerializer):
     """ Serializer for tags """
     class Meta:
