@@ -1,7 +1,7 @@
 """
 URL mapping for the user API.
 """
-from django.urls import path
+from django.urls import path, include
 
 from user import views
 
