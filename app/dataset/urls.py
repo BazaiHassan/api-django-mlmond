@@ -14,6 +14,8 @@ from dataset import views
 router = DefaultRouter()
 
 router.register('datasets', views.DatasetViewSet)
+router.register('tags', views.TagViewSet)
+
 
 app_name = 'dataset'
 
