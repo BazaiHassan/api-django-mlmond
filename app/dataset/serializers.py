@@ -26,11 +26,11 @@ class TagSerializer(serializers.ModelSerializer):
 class DatasetSerializer(serializers.ModelSerializer):
     """ Serializer for Datasets """
     tags = TagSerializer(many=True, required=False)
-
+    image = DatasetImageSerializer(many=False, required=False)
 
     class Meta:
         model = Dataset
-        fields = ['id','title','price','link']
+        fields = ['id','title','price','link','image']
         read_only_fields = ['id']
 
     def _get_or_create_tags(self, tags, dataset):
