@@ -1,9 +1,7 @@
 """
 Views for the User API
 """
-import random
 
-from django.core.mail import send_mail
 from django.contrib.auth.models import User
 
 from rest_framework import generics, authentication, permissions, status

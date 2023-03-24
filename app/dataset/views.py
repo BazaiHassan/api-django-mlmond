@@ -33,17 +33,12 @@ class DatasetViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.DatasetSerializer
     queryset = Dataset.objects.all()
     authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def _params_to_ints(self, qs):
         """ Convert a list of strings to integers """
         return [int(str_id) for str_id in qs.split(',')]
     
-    def get_permissions(self):
-        """ Modifying GET method """
-        if self.request.method == 'GET':
-            return [AllowAny()]
-        return [IsAuthenticated()]
-
 
     def get_queryset(self):
         """ retrieve datasets for authenticated users """
@@ -65,6 +60,7 @@ class DatasetViewSet(viewsets.ModelViewSet):
             return serializers.DatasetSerializer
         elif self.action == 'upload_image':
             return serializers.DatasetImageSerializer
+        
         return self.serializer_class
 
     def perform_create(self, serializer):
@@ -106,7 +102,7 @@ class TagViewSet(
     serializer_class = serializers.TagSerializer
     queryset = Tag.objects.all()
     authentication_classes = [TokenAuthentication]
-
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         """ filter queryset for authenticated users """
@@ -117,9 +113,3 @@ class TagViewSet(
         if assigned_only:
             queryset = queryset.filter(dataset__isnull=False)
         return queryset.filter(user = self.request.user).order_by('-name').distinct()
-    
-    def get_permissions(self):
-        """ Modifying GET method """
-        if self.request.method == 'GET':
-            return [AllowAny()]
-        return [IsAuthenticated()]
