@@ -41,10 +41,10 @@ class DatasetViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         """ Modifying GET method """
         if self.request.method == 'GET':
-            return [AllowAny]
-        return [IsAuthenticated]
-
-        
+            return [AllowAny()]
+        return [IsAuthenticated()]
+    
+            
     def get_queryset(self):
         """ retrieve datasets for authenticated users """
         tags = self.request.query_params.get('tags')

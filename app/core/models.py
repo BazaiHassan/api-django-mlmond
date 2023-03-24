@@ -20,6 +20,12 @@ def dataset_image_file_path(instance, filename):
 
     return os.path.join('uploads','dataset', filename)
 
+def dataset_file_path(insatance, filename):
+    """ Generate file path for new dataset file """
+    ext = os.path.splitext(filename)[1]
+    filename = f'{uuid.uuid4()}{ext}'
+
+    return os.path.join('uploads','dataset', filename)
 
 class UserManager(BaseUserManager):
     """ Manager for users """
