@@ -20,7 +20,7 @@ class DatasetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Dataset
-        fields = ['id','title','price','link','image']
+        fields = ['id','title','description','price','link','image']
         read_only_fields = ['id']
 
     def _get_or_create_tags(self, tags, dataset):
@@ -52,14 +52,7 @@ class DatasetSerializer(serializers.ModelSerializer):
 
         instance.save()
         return instance
-
-
-class DatasetDetailSerializer(DatasetSerializer):
-    """ Serializer for dataset detail view """
-    class Meta(DatasetSerializer.Meta):
-        fields = DatasetSerializer.Meta.fields + ['description']
-
-    
+ 
 
 class DatasetImageSerializer(serializers.ModelSerializer):
     """ Serializer to uploading image to the dataset """

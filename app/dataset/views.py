@@ -30,7 +30,7 @@ from dataset import serializers
 )
 class DatasetViewSet(viewsets.ModelViewSet):
     """ view for manage dataset API """
-    serializer_class = serializers.DatasetDetailSerializer
+    serializer_class = serializers.DatasetSerializer
     queryset = Dataset.objects.all()
     authentication_classes = [TokenAuthentication]
 
