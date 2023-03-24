@@ -106,7 +106,7 @@ class TagViewSet(
     serializer_class = serializers.TagSerializer
     queryset = Tag.objects.all()
     authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
+
 
     def get_queryset(self):
         """ filter queryset for authenticated users """
@@ -117,3 +117,9 @@ class TagViewSet(
         if assigned_only:
             queryset = queryset.filter(dataset__isnull=False)
         return queryset.filter(user = self.request.user).order_by('-name').distinct()
+    
+    def get_permissions(self):
+        """ Modifying GET method """
+        if self.request.method == 'GET':
+            return [AllowAny()]
+        return [IsAuthenticated()]
