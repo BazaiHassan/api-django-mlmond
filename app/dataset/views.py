@@ -59,7 +59,7 @@ class DatasetViewSet(viewsets.ModelViewSet):
             user=self.request.user
         ).order_by('-id').distinct()
 
-    def get_serializer_calss(self):
+    def get_serializer_class(self):
         """ Return the serializer class for request """
         if self.action == 'list':
             return serializers.DatasetSerializer
