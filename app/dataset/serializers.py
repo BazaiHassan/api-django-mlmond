@@ -29,7 +29,7 @@ class DatasetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Dataset
-        fields = ['id','title','price','link']
+        fields = ['id','title','price','link','image']
         read_only_fields = ['id']
 
     def _get_or_create_tags(self, tags, dataset):
