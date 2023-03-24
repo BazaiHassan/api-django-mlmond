@@ -12,7 +12,7 @@ from rest_framework import viewsets, mixins, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from core.models import Dataset, Tag
 from dataset import serializers
@@ -33,11 +33,16 @@ class DatasetViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.DatasetDetailSerializer
     queryset = Dataset.objects.all()
     authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
 
     def _params_to_ints(self, qs):
         """ Convert a list of strings to integers """
         return [int(str_id) for str_id in qs.split(',')]
+    
+    def get_permissions(self):
+        """ Modifying GET method """
+        if self.request.method == 'GET':
+            return [AllowAny]
+        return [IsAuthenticated]
 
         
     def get_queryset(self):
