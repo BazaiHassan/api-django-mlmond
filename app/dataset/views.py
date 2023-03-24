@@ -43,8 +43,8 @@ class DatasetViewSet(viewsets.ModelViewSet):
         if self.request.method == 'GET':
             return [AllowAny()]
         return [IsAuthenticated()]
-    
-            
+
+
     def get_queryset(self):
         """ retrieve datasets for authenticated users """
         tags = self.request.query_params.get('tags')
@@ -65,7 +65,7 @@ class DatasetViewSet(viewsets.ModelViewSet):
             return serializers.DatasetSerializer
         elif self.action == 'upload_image':
             return serializers.DatasetImageSerializer
-        return self.serializer_calss
+        return self.serializer_class
 
     def perform_create(self, serializer):
         """ create a new dataset """
